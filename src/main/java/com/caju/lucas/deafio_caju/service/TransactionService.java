@@ -22,7 +22,7 @@ public class TransactionService {
 		try {
 			MccEnum tipo = MccEnum.obterTipoSaldo(transaction.mcc());
 			
-			validarNomeComerciante(tipo, transaction.merchant());
+			tipo = validarNomeComerciante(transaction.merchant().toLowerCase());
 
 			var saldo = saldoRepository.findByTipo(tipo);
 
@@ -39,7 +39,14 @@ public class TransactionService {
 
 	}
 
-	private void validarNomeComerciante(MccEnum tipo, String merchant) {
+	private MccEnum validarNomeComerciante( String merchant) {
+		if(merchant.contains("food") || merchant.contains("eat") || merchant.contains("restaurant")) {
+			return MccEnum.FOOD;
+		} else if (merchant.contains("market") || merchant.contains("rappy") || merchant.contains("alimento")) {
+			return MccEnum.MEAL;
+		} else {
+			return MccEnum.CASH;
+		}
 	}
 
 	private ResponseTransaction processarTransacao(Saldo saldo, Double amount) {
