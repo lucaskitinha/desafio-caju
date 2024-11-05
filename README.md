@@ -2,6 +2,10 @@
 
 ### Nesse desafio foi desenvolvida uma aplicação para validar uma transação de cartão.
 
+Especificações técnicas:
+- java 17
+- postgresql
+
 A aplicação consiste de um endpoint post com o path __/transaction__. Para executar esse endpoint é necessário utilizar 
 um json no body como o do modelo abaixo:
 
